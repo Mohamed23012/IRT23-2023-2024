@@ -1,5 +1,4 @@
-![](vertopal_45835821dcd54f10b2b1109f9667850a/media/image1.jpeg){width="4.015748031496063e-2in"
-height="4.015748031496063e-2in"}**membres de l\'equipe et chef de
+**membres de l\'equipe et chef de
 l\'equipe**
 
 chef de l\'equipe 23012
