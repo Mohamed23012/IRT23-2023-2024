@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recherche d'enseignants - Teach'r</title>
+    <!-- Intégration de Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Styles personnalisés -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        .card {
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            margin-bottom: 20px;
+        }
+
+        .card-img-top {
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        .card-title {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .card-text {
+            font-size: 16px;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mb-4">Recherche d'enseignants</h1>
+        <form>
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <select class="form-control" id="matiere">
+                        <option value="">Choisir une matière</option>
+                        <option value="mathematiques">Mathématiques</option>
+                        <option value="francais">Français</option>
+                        <option value="histoire">Histoire</option>
+                        <!-- Ajoutez d'autres options selon vos besoins -->
+                    </select>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <select class="form-control" id="niveau">
+                        <option value="">Choisir un niveau</option>
+                        <option value="primaire">Primaire</option>
+                        <option value="college">Collège</option>
+                        <option value="lycee">Lycée</option>
+                        <!-- Ajoutez d'autres options selon vos besoins -->
+                    </select>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <input type="text" class="form-control" placeholder="Localisation">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Rechercher</button>
+        </form>
+        <!-- Résultats de la recherche -->
+        <div class="row mt-4">
+            <!-- Exemple de carte d'aperçu d'enseignant -->
+          
+            <!-- Ajoutez d'autres cartes d'aperçu d'enseignant selon les résultats de recherche -->
+        </div>
+    </div>
+    <!-- Intégration de Bootstrap JS et autres scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
