@@ -5,6 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ajouter un enseignant</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      margin-top: 50px;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+    }
+    h2 {
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
@@ -61,17 +74,16 @@
       <div class="form-group">
         <label for="category">Catégorie:</label>
         <select class="form-control" id="category" name="category" required>
-
             <option value="1">PC</option>
             <option value="2">Maths</option>
             <option value="3">SN</option>
             <option value="4">FR</option>
-         
         </select>
       </div>
-      <button type="submit" class="btn btn-primary">Ajouter</button>
+      <div class="text-center"> 
+        <button type="submit" class="btn btn-primary">Ajouter</button>
+      </div>
     </form>
   </div>
 </body>
 </html>
-
