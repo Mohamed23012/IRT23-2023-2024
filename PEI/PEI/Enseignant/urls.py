@@ -14,6 +14,9 @@ urlpatterns = [
     path('delete/<int:id>', views.confirm_delete, name='confirm_delete'),
     path('destroy/<int:id>', views.destroy, name='destroy'),
     path('graph/', views.graphiques_enseignants, name='graphiques_enseignants'),
+    path('import/enseignant', views.import_enseignant_csv, name='enseignant_import'),
+    path('export/enseignant', views.export_enseignants_csv, name='export_enseignants_csv'),
+    
 
 
 
