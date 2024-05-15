@@ -1,0 +1,22 @@
+{% extends "dashboord.html" %}
+  
+{% block title %}Modifier les données des categorys{% endblock title %}
+  
+{% block content %}
+
+            <div class="col-md-12">
+            <form style="text-align: left;" class="card-body" method="POST" >
+                {% csrf_token %}
+        
+                <div class="card-body">
+                  {{ formcategory }}
+                </div>
+            <div class="mb-3"> 
+                <button type="submit" class="btn btn-success btn-lg">Update</button>  
+            </div> 
+        </div>  
+    </form>  
+</div>
+{% endblock content %}
+
+
