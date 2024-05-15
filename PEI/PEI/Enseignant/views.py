@@ -96,3 +96,31 @@ def destroy(request, id):
         enseignant = Enseignant.objects.get(id=id)  
         enseignant.delete()  
         return redirect("liste_enseignant" )  
+
+
+
+from django.db.models import Count
+
+def graphiques_enseignants(request):
+    # Données pour le graphique d'âge
+    enseignants = Enseignant.objects.all()
+    ages = [enseignant.age for enseignant in enseignants]
+
+    # Données pour le graphique de sexe
+    sexes_count = Enseignant.objects.values('sexe').annotate(nombre=Count('sexe'))
+    sexes = {sex['sexe']: sex['nombre'] for sex in sexes_count}
+
+    # Données pour le graphique de catégorie
+    categories_count = Enseignant.objects.values('categories__nom').annotate(total=Count('categories'))
+    categories = {cat['categories__nom']: cat['total'] for cat in categories_count}
+
+    # Données pour le graphique de niveau
+    niveaux_count = Enseignant.objects.values('niveau').annotate(total=Count('niveau'))
+    niveaux = {niveau['niveau']: niveau['total'] for niveau in niveaux_count}
+
+    return render(request, 'graphiques_enseignants.html', {
+        'ages': ages,
+        'sexes': sexes,
+        'categories': categories,
+        'niveaux': niveaux
+    })
