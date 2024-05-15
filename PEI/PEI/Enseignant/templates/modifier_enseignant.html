@@ -1,0 +1,22 @@
+{% extends "dashboord.html" %}
+  
+{% block title %}Modifier les données des enseignants{% endblock title %}
+  
+{% block content %}
+
+            <div class="col-md-12">
+            <form style="text-align: left;" class="card-body" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+        
+                <div class="card-body">
+                  {{ form }}
+                </div>
+            <div class="mb-3"> 
+                <button type="submit" class="btn btn-success btn-lg">Update</button>  
+            </div> 
+        </div>  
+    </form>  
+</div>
+{% endblock content %}
+
+
