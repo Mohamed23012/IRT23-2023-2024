@@ -25,7 +25,7 @@ class Enseignant(models.Model):
     email = models.EmailField()
     contact = models.CharField(max_length=15)
     age = models.PositiveIntegerField()
-    sexe = models.CharField(max_length=100)
+    sexe = models.CharField(max_length=1, choices=[('M', 'Masculin'), ('F', 'Féminin')])
     cv = models.ImageField(upload_to='images/')
     photo = models.ImageField(upload_to='images/')
     experience = models.CharField(max_length=100)

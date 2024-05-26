@@ -102,11 +102,18 @@ def destroy(request, id):
 def recherche_enseignant(request):
     form = RechercheEnseignantForm(request.GET or None)
     enseignants = Enseignant.objects.all()
+    
     if form.is_valid():
         name = form.cleaned_data.get('name')
+        sexe = form.cleaned_data.get('sexe')
+        experience = form.cleaned_data.get('experience')
+
         if name:
             enseignants = enseignants.filter(name__icontains=name)
-    print(enseignants)
+        if sexe:
+            enseignants = enseignants.filter(sexe=sexe)
+        if experience:
+            enseignants = enseignants.filter(experience__icontains=experience)
 
     return render(request, 'recherche.html', {'form': form, 'enseignants': enseignants})
 
