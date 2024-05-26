@@ -2,7 +2,7 @@ from . import views
 from django.urls import path
 
 urlpatterns = [
-    path('/', views.list_category, name='list_category'),
+
     path('ajoutercategory',views.ajoutercategory, name='ajoutercategory'),
     path('listecategory', views.list_category, name='list_category'),
     path('modifier/<int:id>', views.modifier, name='modifier'), 
@@ -16,7 +16,7 @@ urlpatterns = [
     path('graph/', views.graphiques_enseignants, name='graphiques_enseignants'),
     path('import/enseignant', views.import_enseignant_csv, name='enseignant_import'),
     path('export/enseignant', views.export_enseignants_csv, name='export_enseignants_csv'),
-    
+    path('rechercher/', views.recherche_enseignant, name='recherche_enseignant'),
 
 
 

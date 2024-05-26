@@ -4,6 +4,7 @@ from django.urls import reverse
 
 from Enseignant.forms import CategoryForm, EnseignantForm
 from Enseignant.models import Category, Enseignant
+from .forms import RechercheEnseignantForm
 
 # Create your views here.
 def ajoutercategory(request):  
@@ -98,6 +99,16 @@ def destroy(request, id):
         enseignant = Enseignant.objects.get(id=id)  
         enseignant.delete()  
         return redirect("liste_enseignant" )  
+def recherche_enseignant(request):
+    form = RechercheEnseignantForm(request.GET or None)
+    enseignants = Enseignant.objects.all()
+    if form.is_valid():
+        name = form.cleaned_data.get('name')
+        if name:
+            enseignants = enseignants.filter(name__icontains=name)
+    print(enseignants)
+
+    return render(request, 'recherche.html', {'form': form, 'enseignants': enseignants})
 
 
 

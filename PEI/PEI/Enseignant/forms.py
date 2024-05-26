@@ -47,7 +47,6 @@ class EnseignantForm(forms.ModelForm):
             'niveau': forms.TextInput(attrs={'class': 'form-control'}),
             'categories': forms.SelectMultiple(attrs={'class': 'form-control'}),
             'status': forms.Select(attrs={'class': 'form-control'}),
-<<<<<<< HEAD
         }
 class RechercheEnseignantForm(forms.Form):
     name = forms.CharField(max_length=100, required=False, label='Nom')
@@ -57,6 +56,7 @@ class RechercheEnseignantForm(forms.Form):
     cartier = forms.CharField(max_length=100, required=False, label='Quartier')
     niveau = forms.CharField(max_length=100, required=False, label='Niveau')
     status = forms.ChoiceField(choices=[('confirmé', 'Confirmé')], required=False, label='Statut')
-=======
-        }        
->>>>>>> 0620fcdb0a65ec9cc1d46e910855a6ff644e04ac
+     
+
+    
+
