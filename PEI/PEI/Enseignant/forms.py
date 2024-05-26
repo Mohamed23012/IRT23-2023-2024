@@ -56,7 +56,9 @@ class RechercheEnseignantForm(forms.Form):
     cartier = forms.CharField(max_length=100, required=False, label='Quartier')
     niveau = forms.CharField(max_length=100, required=False, label='Niveau')
     status = forms.ChoiceField(choices=[('confirmé', 'Confirmé')], required=False, label='Statut')
-     
+    sexe = forms.ChoiceField(choices=[('M', 'Masculin'), ('F', 'Féminin')], required=False, label='Sexe')     
+    experience = forms.CharField(max_length=100, required=False, label='Expérience')
+   
 
     
 
