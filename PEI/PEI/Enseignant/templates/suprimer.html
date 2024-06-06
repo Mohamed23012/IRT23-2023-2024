@@ -1,0 +1,15 @@
+{% extends "dashboord.html" %}
+
+{% block title %}Confirm Deletion{% endblock title %}
+
+{% block content %}
+<div class="col-md-12">
+    <h3>Confirm Deletion</h3>
+    <p>Êtes-vous sûr(e) de vouloir supprimer {{ category.nom }}?</p>
+    <form method="POST" action="/destroycategory/{{ category.id }}">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Yes, delete</button>
+        <a href="{% url 'list_category' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock content %}
