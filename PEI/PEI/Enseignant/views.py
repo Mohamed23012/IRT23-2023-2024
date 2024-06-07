@@ -3,7 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 
-from Enseignant.forms import CategoryForm, EnseignantForm
+from Enseignant.forms import CategoryForm, EnseignantForm, RechercheEnseignantForm
 from Enseignant.models import Category, Enseignant
 from .forms import RechercheEnseignantForm
 
@@ -146,3 +146,174 @@ def graphiques_enseignants(request):
         'categories': categories,
         'niveaux': niveaux
     })
+<<<<<<< HEAD
+=======
+from django.contrib.auth.hashers import make_password
+import csv
+
+def import_enseignant_csv(request):
+    if request.method == "GET":
+        return render(request, "csv_import.html", {'oname': "Enseignant", 'opath': "enseignant"})
+    
+    try:
+        csv_file = request.FILES["formFile"]
+        file_data = csv_file.read().decode("latin-1")  # Utilisation de l'encodage latin-1
+        lines = file_data.split("\n")
+        
+        for line in lines:
+            if line.strip():  # Vérifier si la ligne n'est pas vide
+                fields = line.split(",")
+                if len(fields) == 15:  # Vérifier si la ligne contient le nombre attendu de champs
+                    username = fields[0]
+                    password = fields[1] if fields[1] else "default_password"  # Mot de passe par défaut si vide
+                    email = fields[2]
+                    name = fields[3]
+                    prenom = fields[4]
+                    contact = fields[5]
+                    age = int(fields[6])
+                    sexe = fields[7]
+                    experience = fields[8]
+                    cartier = fields[9]
+                    niveau = fields[10]
+                    status = fields[11]
+                    cv = fields[12]  # Assurez-vous que le fichier est déjà téléchargé dans le répertoire de médias
+                    photo = fields[13]  # Assurez-vous que le fichier est déjà téléchargé dans le répertoire de médias
+                    categories_ids = fields[14].split(";")
+                    
+                    enseignant = Enseignant(
+                        username=username,
+                        email=email,
+                        name=name,
+                        prenom=prenom,
+                        contact=contact,
+                        age=age,
+                        sexe=sexe,
+                        experience=experience,
+                        cartier=cartier,
+                        niveau=niveau,
+                        status=status,
+                        cv=cv,
+                        photo=photo,
+                    )
+                    enseignant.set_password(password)  # Pour hacher le mot de passe
+                    enseignant.save()
+                    
+                    categories = Category.objects.filter(id__in=categories_ids)
+                    enseignant.categories.add(*categories)
+                else:
+                    print("Nombre de champs incorrect dans la ligne du fichier CSV")
+            else:
+                print("Ligne vide ignorée")
+
+    except Exception as e:
+        print("Error! Unable to upload file. " + repr(e))
+        return HttpResponseRedirect(reverse("enseignant_import"))
+
+    return HttpResponseRedirect(reverse("liste_enseignant"))
+def export_enseignants_csv(request):
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="enseignants.csv"'
+
+    writer = csv.writer(response)
+    writer.writerow(['username', 'password', 'email', 'name', 'prenom', 'contact', 'age', 'sexe', 'experience', 'cartier', 'niveau', 'status', 'cv', 'photo', 'categories'])
+
+    enseignants = Enseignant.objects.all()
+    for enseignant in enseignants:
+        categories = ';'.join([str(categorie.id) for categorie in enseignant.categories.all()])
+        writer.writerow([
+            enseignant.username,
+            enseignant.password,  # Mot de passe vide pour la sécurité
+            enseignant.email,
+            enseignant.name,
+            enseignant.prenom,
+            enseignant.contact,
+            enseignant.age,
+            enseignant.sexe,
+            enseignant.experience,
+            enseignant.cartier,
+            enseignant.niveau,
+            enseignant.status,
+            enseignant.cv.name if enseignant.cv else '',  # Utilisez le nom du fichier de CV s'il existe, sinon une chaîne vide
+            enseignant.photo.name if enseignant.photo else '',  # Utilisez le nom du fichier de photo s'il existe, sinon une chaîne vide
+            categories,
+        ])
+
+    return response
+
+from django.contrib.auth.decorators import login_required
+
+@login_required
+def home(request):
+    return render(request, 'home.html', {'admin_name': request.user.username})
+
+def home_view(request):
+
+    return render(request,'index.html')
+
+from django.contrib.auth import logout
+from django.shortcuts import redirect
+
+def custom_logout(request):
+    logout(request)
+    return redirect('login')  # Redirige vers la page de login après la déconnexion
+
+def recherche_enseignant(request):
+    form = RechercheEnseignantForm(request.GET or None)
+    enseignants = Enseignant.objects.all()
+    
+    if form.is_valid():
+        name = form.cleaned_data.get('name')
+        sexe = form.cleaned_data.get('sexe')
+        experience = form.cleaned_data.get('experience')
+
+        if name:
+            enseignants = enseignants.filter(name__icontains=name)
+        if sexe:
+            enseignants = enseignants.filter(sexe=sexe)
+        if experience:
+            enseignants = enseignants.filter(experience__icontains=experience)
+
+    return render(request, 'recherche.html', {'form': form, 'enseignants': enseignants})
+
+from django.shortcuts import render, get_object_or_404
+from .models import Category, Enseignant
+
+def categories_list(request):
+    categories = Category.objects.all() 
+    return render(request, 'categories_list.html', {'categories': categories})
+def enseignants_list(request, category_id):
+    category = get_object_or_404(Category, pk=category_id)
+    # Filtrer les enseignants dont le statut est "confirmé"
+    enseignants = category.enseignant_set.filter(status='confirmé')
+    return render(request, 'enseignants_list.html', {'category': category, 'enseignants': enseignants})
+
+from django.shortcuts import render
+from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
+from .models import Enseignant
+
+@login_required
+def profile(request):
+    # Vérifiez si l'utilisateur est authentifié
+    if request.user.is_authenticated:
+        # Vérifiez si l'utilisateur a un profil d'enseignant
+        if hasattr(request.user, 'enseignant'):
+            # Récupérez l'ID de l'enseignant
+            enseignant_id = request.user.enseignant.id
+            # Récupérez l'objet Enseignant correspondant à cet ID
+            enseignant = Enseignant.objects.get(id=enseignant_id)
+            # Passez l'objet enseignant au template
+            return render(request, 'profile.html', {'enseignant': enseignant})
+        else:
+            # Gérer le cas où l'utilisateur n'a pas de profil d'enseignant
+            # Peut-être rediriger vers une page
+            #  d'erreur ou créer un profil d'enseignant pour cet utilisateur
+            pass
+    else:
+        # Gérer le cas où l'utilisateur n'est pas authentifié
+        # Peut-être rediriger vers une page de connexion
+        pass
+
+    # Si aucun HttpResponse n'est retourné dans les cas ci-dessus, retournez une réponse vide
+    return HttpResponse()
+>>>>>>> 23242
