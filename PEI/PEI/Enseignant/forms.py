@@ -19,11 +19,9 @@ class EnseignantForm(forms.ModelForm):
     class Meta:
         model = Enseignant
         fields = [
-            'username',
-            'password',
-            'email',
             'name',
             'prenom',
+            'email',
             'contact',
             'age',
             'sexe',
@@ -36,8 +34,6 @@ class EnseignantForm(forms.ModelForm):
             'status',
         ]
         widgets = {
-            'username': forms.TextInput(attrs={'class': 'form-control'}),
-            'password': forms.PasswordInput(attrs={'class': 'form-control'}),
             'name': forms.TextInput(attrs={'class': 'form-control'}),
             'prenom': forms.TextInput(attrs={'class': 'form-control'}),
             'email': forms.EmailInput(attrs={'class': 'form-control'}),
@@ -51,4 +47,4 @@ class EnseignantForm(forms.ModelForm):
             'niveau': forms.TextInput(attrs={'class': 'form-control'}),
             'categories': forms.SelectMultiple(attrs={'class': 'form-control'}),
             'status': forms.Select(attrs={'class': 'form-control'}),
-        }    
+        }        
