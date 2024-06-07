@@ -6,14 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Categories List</title>
     <style>
+        .category-card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
         .category-card {
-            width: 200px;
-            display: inline-block;
-            margin: 10px;
+            width: calc(50% - 20px); /* 50% width with margins */
+            margin-bottom: 20px;
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
             text-align: center;
+            box-sizing: border-box; /* Include padding and border in the width calculation */
         }
         .category-card img {
             width: 100px;
@@ -21,17 +26,27 @@
             border-radius: 50%;
             margin-bottom: 10px;
         }
+        .category-card p {
+            margin: 0;
+        }
     </style>
 </head>
 <body>
     {% block content %}
     <h1>Categories</h1>
-    {% for category in categories %}
-    <a href="{% url 'enseignants_list' category.id %}" class="category-card">
-        <img src="{{ category.photo.url }}" alt="{{ category.nom }}">
-        <h2>{{ category.nom }}</h2>
-    </a>
-    {% endfor %}
+    <div class="category-card-container">
+        {% for category in categories %}
+        <div class="category-card">
+            <a href="{% url 'enseignants_list' category.id %}">
+                <img src="{{ category.photo.url }}" alt="{{ category.nom }}">
+                <p>{{ category.nom }}</p>
+            </a>
+        </div>
+        {% if forloop.counter|divisibleby:2 and not forloop.last %}
+            <div style="width: calc(50% - 20px);"></div> <!-- Empty div to maintain space between cards -->
+        {% endif %}
+        {% endfor %}
+    </div>
     {% endblock content %}
 </body>
 </html>

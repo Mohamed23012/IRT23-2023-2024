@@ -265,3 +265,33 @@ def enseignants_list(request, category_id):
     # Filtrer les enseignants dont le statut est "confirmé"
     enseignants = category.enseignant_set.filter(status='confirmé')
     return render(request, 'enseignants_list.html', {'category': category, 'enseignants': enseignants})
+
+from django.shortcuts import render
+from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
+from .models import Enseignant
+
+@login_required
+def profile(request):
+    # Vérifiez si l'utilisateur est authentifié
+    if request.user.is_authenticated:
+        # Vérifiez si l'utilisateur a un profil d'enseignant
+        if hasattr(request.user, 'enseignant'):
+            # Récupérez l'ID de l'enseignant
+            enseignant_id = request.user.enseignant.id
+            # Récupérez l'objet Enseignant correspondant à cet ID
+            enseignant = Enseignant.objects.get(id=enseignant_id)
+            # Passez l'objet enseignant au template
+            return render(request, 'profile.html', {'enseignant': enseignant})
+        else:
+            # Gérer le cas où l'utilisateur n'a pas de profil d'enseignant
+            # Peut-être rediriger vers une page
+            #  d'erreur ou créer un profil d'enseignant pour cet utilisateur
+            pass
+    else:
+        # Gérer le cas où l'utilisateur n'est pas authentifié
+        # Peut-être rediriger vers une page de connexion
+        pass
+
+    # Si aucun HttpResponse n'est retourné dans les cas ci-dessus, retournez une réponse vide
+    return HttpResponse()

@@ -1,0 +1,20 @@
+{% extends 'dashboord_en.html' %}
+
+{% block content %}
+<div class="container">
+    <h1>Profil Enseignant</h1>
+    <div class="card">
+        <div class="card-header">
+            Informations personnelles
+        </div>
+        <div class="card-body">
+            <p><strong>Nom: </strong>{{ enseignant.nom }}</p>
+            <p><strong>Prénom: </strong>{{ enseignant.prenom }}</p>
+            <p><strong>Email: </strong>{{ enseignant.email }}</p>
+            <p><strong>Âge: </strong>{{ enseignant.age }}</p>
+            <p><strong>Expérience: </strong>{{ enseignant.experience }}</p>
+            <!-- Ajoutez ici d'autres champs d'information selon vos besoins -->
+        </div>
+    </div>
+</div>
+{% endblock %}

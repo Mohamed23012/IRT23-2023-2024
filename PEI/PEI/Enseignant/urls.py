@@ -23,7 +23,7 @@ urlpatterns = [
     path('rechercher/', views.recherche_enseignant, name='recherche_enseignant'),
     path('categories/', views.categories_list, name='categories_list'),
     path('categories/<int:category_id>/', views.enseignants_list, name='enseignants_list'),
-
+    path('profile/', views.profile, name='profile'),
 
 
 ]
