@@ -54,7 +54,7 @@
             <ul class="nav nav-treeview">
             
               <li class="nav-item">
-                <a href="{% url 'list_category' %}" class="nav-link">
+                <a href="{% url 'graphiques_enseignants' %}" class="nav-link">
                 <a href="{% url 'graphiques_enseignants' %}" class="nav-link">
                   <i class="fas fa-chart-bar nav-icon"></i>
                   <p>Dashboard </span></p>
@@ -64,30 +64,21 @@
           </li>
           
           <li class="nav-item">
+            <a href="{% url 'liste_enseignant' %}" class="nav-link" >
+              <i class="nav-icon fas fa-users"></i>
+              <p>Enseignant <span class="right badge badge-danger">New</span></p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="{% url 'list_category' %}" class="nav-link ">
               <i class="nav-icon fas fa-list-alt"></i>
               <p>Categories <span class="right badge badge-danger">New</span></p>
             </a>
           </li>
-<<<<<<< HEAD
-       
-=======
-          <li class="nav-item">
-
-            <a href="{% url 'recherche_enseignant' %}" class="nav-link">
-                <i class="fas fa-search"></i>
-                <p>Recherche <span class="right badge badge-danger">New</span></p>
-            </a>
-        </li>
         
 
-            <a href="{% url 'list_category' %}" class="nav-link ">
-             <i class="fa-solid fa-money-check-dollar-pen"></i>
-              <p>Paiement <span class="right badge badge-danger">New</span></p>
-            </a>
-          </li>
+           
 
->>>>>>> 75c33eae9a35682bb1f7cb9dd441553a6692ad29
         </ul>
       </nav>
     </div>

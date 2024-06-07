@@ -48,29 +48,7 @@
                     </thead>
                     <tbody>
 
-                    {% for enseignant in enseignants %}  
-                        <tr>  
-                            <!-- <td><input type="checkbox" class="checkthis" /></td> -->
-                            <!-- <td>{{ enseignant.id }}</td> -->
-                            <td>{{ enseignant.name }}</td> 
-                            <td>{{ enseignant.prenom }}</td>  
-                            <td>{{ enseignant.email }}</td>  
-                            <td>{{ enseignant.contact }}</td>
-                            <td>{{ enseignant.age }}</td>  
-                            <td>{{ enseignant.sexe }}</td> 
-                            <td><img src="{{ enseignant.cv.url }}" width="86" height="76"></td>  
-                            <td><img src="{{ enseignant.photo.url }}" width="86" height="76"></td> 
-                            <td>{{ enseignant.experience }}</td> 
-                            <td>{{ enseignant.cartier }}</td> 
-                            <td>{{ enseignant.niveau }}</td> 
-                            <td> {% for categorie in enseignant.categories.all %}<li>{{ categorie.nom }}</li>{% endfor %}</td> 
-                            <td> <a href="/confirmer_enseignant/{{ enseignant.id }}" class="btn btn-primary"><i class="fas fa-check"></i> Confirmer</a></td> 
-
-                            <td><a href="/update/{{ enseignant.id }}" class="btn btn-primary"><i class="fas fa-edit"></i></a></td>
-                            <td><a href="/delete/{{ enseignant.id }}" class="btn btn-danger" title="Supprimer"><i class="fas fa-trash-alt"></i></a></td>
-                        </tr>  
-                    {% endfor %} 
-
+                   
 
 
                     {% for enseignant in enseignants %}

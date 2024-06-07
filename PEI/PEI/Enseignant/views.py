@@ -208,3 +208,10 @@ def home(request):
 def home_view(request):
 
     return render(request,'index.html')
+
+from django.contrib.auth import logout
+from django.shortcuts import redirect
+
+def custom_logout(request):
+    logout(request)
+    return redirect('login')  # Redirige vers la page de login après la déconnexion
