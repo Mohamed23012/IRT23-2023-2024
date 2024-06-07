@@ -10,11 +10,10 @@ class Category(models.Model):
     def __str__(self):
         return self.nom       
 
+from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import Group, Permission
 
-
-
-
-class Enseignant(models.Model):
+class Enseignant(AbstractUser):
     STATUS_CHOICES = (
         ('confirmé', 'Confirmé'),
         ('non confirmé', 'Non confirmé'),
@@ -33,6 +32,9 @@ class Enseignant(models.Model):
     niveau = models.CharField(max_length=100)
     categories = models.ManyToManyField(Category)  # Relation ManyToMany avec Category
     status = models.CharField(max_length=100, choices=STATUS_CHOICES, default='non confirmé')
+    # Vos champs personnalisés ici
+    groups = models.ManyToManyField(Group, related_name='enseignants_groups')
+    user_permissions = models.ManyToManyField(Permission, related_name='enseignants_permissions')
 
     class Meta:
         db_table = "enseignant"

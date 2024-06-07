@@ -53,19 +53,20 @@ def destroycategory(request, id):
         return redirect("list_category" )   
 
 
-def ajouterenseignant(request):  
-    if request.method == "POST" :  
-        form = EnseignantForm(request.POST, request.FILES)  
-        if form.is_valid():  
-             
-                form.save()  
-                return redirect('liste_enseignant')
-                print("ah")  
-            
-        else :
-            print ("ah1")   
-    else:  
-        form = EnseignantForm() 
+
+def ajouterenseignant(request):
+    if request.method == "POST":
+        form = EnseignantForm(request.POST, request.FILES)
+        if form.is_valid():
+            enseignant = form.save()  # Ne sauvegarde pas encore dans la base de données
+            enseignant.password = make_password(form.cleaned_data['password'])  # Hache le mot de passe
+            enseignant.save()  # Sauvegarde maintenant avec le mot de passe haché
+            return redirect('liste_enseignant')
+            print("ah")
+        else:
+            print("ah1")
+    else:
+        form = EnseignantForm()
         print("err")
         
     return render(request,'ajouterenseignant.html',{'form':form}) 
@@ -126,7 +127,7 @@ def graphiques_enseignants(request):
         'categories': categories,
         'niveaux': niveaux
     })
-
+from django.contrib.auth.hashers import make_password
 import csv
 def import_enseignant_csv(request):
     if request.method == "GET":
