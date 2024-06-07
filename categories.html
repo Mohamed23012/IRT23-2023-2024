@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Tableau de Gestion des Catégories avec Bootstrap</title>
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container mt-5">
+  <h2>Gestion des Catégories</h2>
+
+  <!-- Bouton Ajouter et Recherche -->
+  <div class="d-flex justify-content-between mb-3">
+    <button type="button" class="btn btn-primary" onclick="ajouterCategorie()">Ajouter Catégorie</button>
+    <input type="text" class="form-control w-50" id="rechercheCategorie" onkeyup="rechercherCategorie()" placeholder="Rechercher par ID ou nom...">
+  </div>
+
+  <!-- Tableau des Catégories -->
+  <table class="table table-bordered">
+    <thead class="thead-dark">
+      <tr>
+        <th>ID</th>
+        <th>Nom de la Catégorie</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody id="tableCategories">
+      <!-- Les lignes de catégories seront ajoutées ici dynamiquement -->
+    </tbody>
+  </table>
+</div>
+
+<script>
+// Exemple de données de catégories
+let categories = [
+  { id: 1, nom: '' },
+  { id: 2, nom: '' },
+  // Ajoutez d'autres catégories ici
+];
+
+function afficherCategories() {
+  const tbody = document.getElementById('tableCategories');
+  tbody.innerHTML = ''; // Nettoyer le tbody avant de le reremplir
+
+  categories.forEach(categorie => {
+    let row = tbody.insertRow();
+    let cellId = row.insertCell(0);
+    let cellNom = row.insertCell(1);
+    let cellActions = row.insertCell(2);
+
+    cellId.innerHTML = categorie.id;
+    cellNom.innerHTML = categorie.nom;
+    cellActions.innerHTML = `<button class="btn btn-warning btn-sm mr-2" onclick="modifierCategorie(${categorie.id})">Modifier</button>
+                             <button class="btn btn-danger btn-sm" onclick="supprimerCategorie(${categorie.id})">Supprimer</button>`;
+  });
+}
+
+function ajouterCategorie() {
+  // Code pour ajouter une catégorie
+  console.log("Ajouter une catégorie");
+  // Après ajout, rafraîchir la liste
+  afficherCategories();
+}
+
+function modifierCategorie(id) {
+  // Code pour modifier une catégorie
+  console.log("Modifier une catégorie", id);
+  // Implémentez la logique de modification ici
+}
+
+function supprimerCategorie(id) {
+  // Code pour supprimer une catégorie
+  console.log("Supprimer une catégorie", id);
+  categories = categories.filter(categorie => categorie.id !== id);
+  afficherCategories();
+}
+
+function rechercherCategorie() {
+  // Code pour rechercher une catégorie
+  console.log("Recherche en cours...");
+}
+
+afficherCategories();
+</script>
+
+</body>
+</html>
+

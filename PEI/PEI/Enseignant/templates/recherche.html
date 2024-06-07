@@ -1,0 +1,58 @@
+{% extends 'dashboord.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4 text-center">Recherche d'Enseignants</h2>
+    <form method="get" class="mb-5">
+        <div class="row g-3">
+            <div class="col-md-4">
+                <label for="name" class="form-label">{{ form.name.label }}</label>
+                {{ form.name }}
+            </div>
+            <div class="col-md-4">
+                <label for="sexe" class="form-label">{{ form.sexe.label }}</label>
+                {{ form.sexe }}
+            </div>
+            <div class="col-md-4">
+                <label for="experience" class="form-label">{{ form.experience.label }}</label>
+                {{ form.experience }}
+            </div>
+        </div>
+        <div class="mt-4 text-center">
+            <button type="submit" class="btn btn-primary">Rechercher</button>
+        </div>
+    </form>
+
+    <hr>
+
+    <!-- Only display results if any search field is filled -->
+    {% if form.is_valid and enseignants %}
+        <h3 class="text-secondary">Résultats :</h3>
+        <div class="card">
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    {% for enseignant in enseignants %}
+                        {% if enseignant.status == 'confirmé' %}
+                            <li class="list-group-item">
+                                <!-- Displaying the image -->
+                                {% if enseignant.photo %}
+                                    <img src="{{ enseignant.photo.url }}" alt="Photo de {{ enseignant.name }} {{ enseignant.prenom }}" class="img-thumbnail mb-2" style="width: 100px; height: auto;">
+                                {% endif %}
+                                <strong>{{ enseignant.name }} {{ enseignant.prenom }}</strong> <br>
+                                Email: {{ enseignant.email }}<br>
+                                Contact: {{ enseignant.contact }}<br>
+                                Age: {{ enseignant.age }} | Quartier: {{ enseignant.cartier }}<br>
+                                Niveau: {{ enseignant.niveau }}<br>
+                                Expérience: {{ enseignant.experience }}
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        {% else %}
+        <p class="text-center">Aucun résultat trouvé.</p>
+    {% endif %}
+    
+</div>
+{% endblock %}

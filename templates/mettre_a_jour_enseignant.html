@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Mettre à Jour Enseignant</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f0f2f5;
+        }
+        .container {
+            max-width: 800px;
+            margin-top: 50px;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+        }
+        .form-header {
+            margin-bottom: 30px;
+            color: #007bff;
+        }
+        .btn-primary {
+            width: 100%;
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .card {
+            margin-top: 30px;
+        }
+        .list-group-item {
+            background-color: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center form-header">Mettre à Jour Enseignant</h1>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary mt-3">Mettre à Jour</button>
+        </form>
+        <div class="card mt-5">
+            <div class="card-body">
+                <h2>Historique des Modifications</h2>
+                <ul class="list-group">
+                    {% for history in histories %}
+                    <li class="list-group-item">
+                        <strong>{{ history.updated_at }}</strong> - {{ history.name }} {{ history.prenom }} - {{ history.email }}
+                        <br>
+                        Contact: {{ history.contact }} | Age: {{ history.age }} | Sexe: {{ history.sexe }}
+                        <br>
+                        Expérience: {{ history.experience }} | Cartier: {{ history.cartier }} | Niveau: {{ history.niveau }}
+                        <br>
+                        Category: {{ history.category.nom }} | Status: {{ history.status }}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
