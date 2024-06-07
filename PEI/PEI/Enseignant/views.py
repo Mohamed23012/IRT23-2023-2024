@@ -198,3 +198,19 @@ def export_enseignants_csv(request):
         ])
 
     return response
+
+from django.contrib.auth.decorators import login_required
+
+@login_required
+def home(request):
+    return render(request, 'home.html', {'admin_name': request.user.username})
+
+def home_view(request):
+
+    return render(request,'index.html')
+from django.contrib.auth import logout
+from django.shortcuts import redirect
+
+def custom_logout(request):
+    logout(request)
+    return redirect('login')  # Redirige vers la page de login après la déconnexion

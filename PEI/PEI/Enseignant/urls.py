@@ -1,8 +1,9 @@
 from . import views 
 from django.urls import path
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
-    path('/', views.list_category, name='list_category'),
+    path('',views.home_view,name=''),
     path('ajoutercategory',views.ajoutercategory, name='ajoutercategory'),
     path('listecategory', views.list_category, name='list_category'),
     path('modifier/<int:id>', views.modifier, name='modifier'), 
@@ -16,7 +17,9 @@ urlpatterns = [
     path('graph/', views.graphiques_enseignants, name='graphiques_enseignants'),
     path('import/enseignant', views.import_enseignant_csv, name='enseignant_import'),
     path('export/enseignant', views.export_enseignants_csv, name='export_enseignants_csv'),
-    
+    path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
+    # path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+    path('logout/', views.custom_logout, name='logout'),
 
 
 
