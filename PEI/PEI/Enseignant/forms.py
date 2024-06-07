@@ -1,44 +1,11 @@
 from django import forms
-<<<<<<< HEAD
-from .models import Enseignant 
-from .models import Category  
-=======
 from Enseignant.models import Category, Enseignant
 
->>>>>>> main
 
 class CategoryForm(forms.ModelForm):  
     class Meta:  
         model = Category  
         fields = [
-<<<<<<< HEAD
-           
-            'nom',
-        ]
-        widgets = {
-            'nom': forms.TextInput(attrs={ 'class': 'form-control' }),
-        }
-class EnseignantForm(forms.ModelForm):
-    class Meta:
-        model = Enseignant
-        fields = ['name', 'prenom', 'email', 'contact', 'age', 'sexe', 'cv', 'photo', 'experience', 'cartier', 'niveau', 'category', 'status']
-
-
-class EnseignantSignupForm(forms.ModelForm):
-    class Meta:
-        model = Enseignant
-        fields = ['name', 'prenom', 'email', 'contact', 'age', 'sexe', 'cv', 'photo', 'experience', 'cartier', 'niveau', 'category', 'status']
-
-class EnseignantUpdateForm(forms.ModelForm):
-    class Meta:
-        model = Enseignant
-        fields = ['name', 'prenom', 'email', 'contact', 'age', 'sexe', 'cv', 'photo', 'experience', 'cartier', 'niveau', 'category', 'status']
-from django import forms
-
-class AgeFilterForm(forms.Form):
-    age_min = forms.IntegerField(label='Âge minimum', required=False)
-    age_max = forms.IntegerField(label='Âge maximum', required=False)
-=======
             'nom',
             'photo',
         ]
@@ -52,11 +19,9 @@ class EnseignantForm(forms.ModelForm):
     class Meta:
         model = Enseignant
         fields = [
-            'username',
-            'password',
-            'email',
             'name',
             'prenom',
+            'email',
             'contact',
             'age',
             'sexe',
@@ -69,8 +34,6 @@ class EnseignantForm(forms.ModelForm):
             'status',
         ]
         widgets = {
-            'username': forms.TextInput(attrs={'class': 'form-control'}),
-            'password': forms.PasswordInput(attrs={'class': 'form-control'}),
             'name': forms.TextInput(attrs={'class': 'form-control'}),
             'prenom': forms.TextInput(attrs={'class': 'form-control'}),
             'email': forms.EmailInput(attrs={'class': 'form-control'}),
@@ -84,23 +47,4 @@ class EnseignantForm(forms.ModelForm):
             'niveau': forms.TextInput(attrs={'class': 'form-control'}),
             'categories': forms.SelectMultiple(attrs={'class': 'form-control'}),
             'status': forms.Select(attrs={'class': 'form-control'}),
-<<<<<<< HEAD
-        }    
-=======
-        }
-class RechercheEnseignantForm(forms.Form):
-    name = forms.CharField(max_length=100, required=False, label='Nom')
-    prenom = forms.CharField(max_length=100, required=False, label='Prénom')
-    email = forms.EmailField(required=False, label='Email')
-    contact = forms.CharField(max_length=100, required=False, label='Contact')
-    cartier = forms.CharField(max_length=100, required=False, label='Quartier')
-    niveau = forms.CharField(max_length=100, required=False, label='Niveau')
-    status = forms.ChoiceField(choices=[('confirmé', 'Confirmé')], required=False, label='Statut')
-    sexe = forms.ChoiceField(choices=[('M', 'Masculin'), ('F', 'Féminin')], required=False, label='Sexe')     
-    experience = forms.CharField(max_length=100, required=False, label='Expérience')
-   
-
-    
-
->>>>>>> main
->>>>>>> 75c33eae9a35682bb1f7cb9dd441553a6692ad29
+        }        
