@@ -1,0 +1,55 @@
+{% extends 'dashboord_eleve.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ category.name }} Enseignants</title>
+    <style>
+        .enseignant-card {
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            display: inline-block;
+            width: calc(50% - 20px); /* 50% width with margins */
+            vertical-align: top; /* Align cards to the top */
+            box-sizing: border-box; /* Include padding and border in the width calculation */
+        }
+        .enseignant-card img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-right: 20px;
+        }
+        .enseignant-details {
+            display: inline-block;
+            vertical-align: top;
+            width: calc(100% - 120px); /* Width of the details section */
+        }
+    </style>
+</head>
+<body>
+    {% block content %}
+    <h1>{{ category.name }} Enseignants</h1>
+    <div>
+        {% for enseignant in enseignants %}
+        {% if enseignant.status == 'confirmé' %}
+            <li class="list-group-item">
+                <!-- Displaying the image -->
+                {% if enseignant.photo %}
+                    <img src="{{ enseignant.photo.url }}" alt="Photo de {{ enseignant.name }} {{ enseignant.prenom }}" class="img-thumbnail mb-2" style="width: 100px; height: auto;">
+                {% endif %}
+                <strong>{{ enseignant.name }} {{ enseignant.prenom }}</strong> <br>
+                Email: {{ enseignant.email }}<br>
+                Contact: {{ enseignant.contact }}<br>
+                Age: {{ enseignant.age }} | Quartier: {{ enseignant.cartier }}<br>
+                Niveau: {{ enseignant.niveau }}<br>
+                Expérience: {{ enseignant.experience }}
+            </li>
+        {% endif %}
+    {% endfor %}
+    </div>
+    {% endblock content %}
+</body>
+</html>

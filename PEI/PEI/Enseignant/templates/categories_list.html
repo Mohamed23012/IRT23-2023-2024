@@ -1,0 +1,37 @@
+{% extends 'dashboord_eleve.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categories List</title>
+    <style>
+        .category-card {
+            width: 200px;
+            display: inline-block;
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .category-card img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    {% block content %}
+    <h1>Categories</h1>
+    {% for category in categories %}
+    <a href="{% url 'enseignants_list' category.id %}" class="category-card">
+        <img src="{{ category.photo.url }}" alt="{{ category.nom }}">
+        <h2>{{ category.nom }}</h2>
+    </a>
+    {% endfor %}
+    {% endblock content %}
+</body>
+</html>

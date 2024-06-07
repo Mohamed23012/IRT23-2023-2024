@@ -52,3 +52,23 @@ class EnseignantForm(forms.ModelForm):
             'categories': forms.SelectMultiple(attrs={'class': 'form-control'}),
             'status': forms.Select(attrs={'class': 'form-control'}),
         }      
+
+
+
+
+
+class RechercheEnseignantForm(forms.Form):
+    name = forms.CharField(max_length=100, required=False, label='Nom')
+    prenom = forms.CharField(max_length=100, required=False, label='Prénom')
+    email = forms.EmailField(required=False, label='Email')
+    contact = forms.CharField(max_length=100, required=False, label='Contact')
+    cartier = forms.CharField(max_length=100, required=False, label='Quartier')
+    niveau = forms.CharField(max_length=100, required=False, label='Niveau')
+    status = forms.ChoiceField(choices=[('confirmé', 'Confirmé')], required=False, label='Statut')
+    sexe = forms.ChoiceField(
+    choices=[('', 'Sélectionner'), ('M', 'Masculin'), ('F', 'Féminin')],
+    required=False,
+    label='Sexe'
+)
+     
+    experience = forms.CharField(max_length=100, required=False, label='Expérience')        

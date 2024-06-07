@@ -20,6 +20,9 @@ urlpatterns = [
     path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
     # path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('logout/', views.custom_logout, name='logout'),
+    path('rechercher/', views.recherche_enseignant, name='recherche_enseignant'),
+    path('categories/', views.categories_list, name='categories_list'),
+    path('categories/<int:category_id>/', views.enseignants_list, name='enseignants_list'),
 
 
 
